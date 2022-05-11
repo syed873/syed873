@@ -1,0 +1,77 @@
+﻿@model ImageCRUD.Models.tbl_img
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@using (Html.BeginForm("Create", "crudimg", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>tbl_img</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.city, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.city, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.city, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.img, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @*@Html.EditorFor(model => model.img, new { htmlAttributes = new { @class = "form-control" } })*@
+            <input type="file" name="file" required="required" id="file" />
+            @Html.ValidationMessageFor(model => model.img, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.img, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @*@Html.EditorFor(model => model.img, new { htmlAttributes = new { @class = "form-control" } })*@
+            <input type="file" id="input" name="file" class="dropify" data-default-file="model.img" data-max-file-size-preview="3m">
+            @Html.ValidationMessageFor(model => model.img, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/dropify.js"></script>
+    <script src="~/Scripts/dropify.min.js"></script>
+
+    <script>
+        $('.dropify').dropify({
+            messages: {
+                default: 'Drag and drop a file here or click',
+                replace: 'Drag and drop or click to replace',
+                remove: 'Remove',
+                error: 'Ooops, something wrong happended.'
+            }
+        });
+
+    </script>
+    
+}
